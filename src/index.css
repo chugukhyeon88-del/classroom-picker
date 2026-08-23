@@ -167,3 +167,29 @@ body {
 .animate-cg-rise {
   animation: cg-rise 0.55s ease-out both;
 }
+
+.cg-input {
+  border: 2px solid #c5d6e4;
+  border-radius: 0.85rem;
+  background: #fff;
+  padding: 0.7rem 0.9rem;
+  font-size: 0.95rem;
+  color: #0b3a66;
+  outline: none;
+}
+
+.cg-input:focus {
+  border-color: #0b3a66;
+  box-shadow: 0 0 0 3px rgba(11, 58, 102, 0.12);
+}
+
+.cg-nav-link {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #5a6f82;
+  text-decoration: none;
+}
+
+.cg-nav-link:hover {
+  color: #0b3a66;
+}
