@@ -19,11 +19,9 @@ const TONE_BG: Record<string, string> = {
 
 export function ResultView({
   selections,
-  sessionCode,
   onReplay,
 }: {
   selections: Selections
-  sessionCode: string | null
   onReplay: () => void
 }) {
   const [teacherName, setTeacherName] = useState('')
@@ -32,14 +30,10 @@ export function ResultView({
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState('')
 
-  const canSubmit = isFirebaseConfigured && Boolean(sessionCode)
+  const canSubmit = isFirebaseConfigured
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    if (!sessionCode) {
-      setError('활동 코드가 없습니다. 처음 화면에서 코드를 입력해 주세요.')
-      return
-    }
     if (!teacherName.trim()) {
       setError('이름을 입력해 주세요.')
       return
@@ -49,7 +43,6 @@ export function ResultView({
     setError('')
     try {
       await submitResult({
-        sessionCode,
         teacherName,
         school,
         selections,
@@ -143,13 +136,6 @@ export function ResultView({
                 maxLength={60}
               />
             </label>
-            {sessionCode ? (
-              <p className="text-xs text-[#5a6f82]">
-                활동 코드 <strong className="text-[#0b3a66]">{sessionCode}</strong>로 제출됩니다.
-              </p>
-            ) : (
-              <p className="text-xs text-[#c43c3c]">활동 코드가 없습니다. 처음 화면에서 참여해 주세요.</p>
-            )}
             {error ? <p className="text-sm text-[#c43c3c]">{error}</p> : null}
             <button
               type="submit"

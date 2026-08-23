@@ -8,18 +8,8 @@ export type ChoiceSummary = {
   cost: number
 }
 
-export type ClassroomSession = {
-  id: string
-  code: string
-  title: string
-  adminToken: string
-  createdAt: number
-}
-
 export type Submission = {
   id: string
-  sessionId: string
-  sessionCode: string
   teacherName: string
   school: string
   selections: Selections

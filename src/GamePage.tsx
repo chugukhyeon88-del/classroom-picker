@@ -12,7 +12,6 @@ import {
   type CategoryId,
   type Selections,
 } from './data'
-import { getStoredSessionCode } from './lib/sessionCode'
 
 const GRID = {
   left: 18.9,
@@ -35,7 +34,6 @@ const SELECT_RING: Record<string, string> = {
 export function GamePage() {
   const [selections, setSelections] = useState<Selections>({})
   const [showResult, setShowResult] = useState(false)
-  const sessionCode = getStoredSessionCode()
 
   const spent = getSpent(selections)
   const remaining = BUDGET - spent
@@ -60,13 +58,11 @@ export function GamePage() {
             <span className="font-[family-name:var(--font-cg)] text-sm text-[#0b3a66]">
               초등교사 학급 고르기
             </span>
-            {sessionCode ? (
-              <span className="rounded-full bg-[#0b3a66]/10 px-3 py-1 text-xs font-bold text-[#0b3a66]">
-                활동 {sessionCode}
-              </span>
-            ) : null}
+            <Link to="/admin" className="cg-nav-link text-xs">
+              관리자
+            </Link>
           </nav>
-          <ResultView selections={selections} sessionCode={sessionCode} onReplay={reset} />
+          <ResultView selections={selections} onReplay={reset} />
         </div>
       </div>
     )
@@ -76,15 +72,9 @@ export function GamePage() {
     <div className="classroom-game flex min-h-dvh flex-col">
       <div className="classroom-sheet relative flex-1 px-2 pb-4 pt-3 sm:px-6 sm:pt-6">
         <nav className="mx-auto mb-3 flex max-w-[720px] items-center justify-between px-1">
-          {sessionCode ? (
-            <span className="rounded-full bg-[#0b3a66]/10 px-3 py-1 text-[11px] font-bold text-[#0b3a66] sm:text-xs">
-              활동 {sessionCode}
-            </span>
-          ) : (
-            <Link to="/admin" className="cg-nav-link text-xs">
-              관리자
-            </Link>
-          )}
+          <Link to="/admin" className="cg-nav-link text-xs">
+            관리자
+          </Link>
           <span className="rounded-full bg-[#0b3a66] px-3 py-1 text-[11px] font-bold text-white sm:text-xs">
             클릭해서 고르기 · 합 100만원
           </span>
